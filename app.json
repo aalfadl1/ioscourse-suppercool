@@ -7,23 +7,48 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.abdulkader.trademasterpro"
     },
+
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.abdulkader.trademasterpro"
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+
+    "scheme": "trademasterpro",
+
+    "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.trademasterpro",
+          "merchantCountryCode": "US",
+          "enableGooglePay": true
+        }
+      ]
+    ],
+
+    "extra": {
+      "EXPO_PUBLIC_SUPABASE_URL": "https://yrkdpfznfdecdghjoikd.supabase.co",
+      "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlya2RwZnpuZmRlY2RnaGpvaWtkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3OTE0NDUsImV4cCI6MjA3MDM2NzQ0NX0.mT-10N7BoK6lZ3Woh4gIrUs1TVT7iMrCnNviL_TjxJY",
+      "EXPO_PUBLIC_ALPHAVANTAGE_KEY": "9REL8S11976LQ1AE"
     }
   }
 }
