@@ -1,46 +1,28 @@
-
----
-
-## 2) `.github/workflows/ci.yml`
-
-Create the folders if they don’t exist: `.github/workflows/` and then add `ci.yml` with:
-
-```yaml
 name: CI
-
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   check:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: npm
+          cache: 'npm'
 
-      - name: Install
-        run: npm ci
+      - run: npm ci
 
-      # TypeScript (only if tsconfig.json exists)
-      - name: Type check
-        if: hashFiles('tsconfig.json') != ''
+      # TypeScript only if tsconfig.json exists
+      - if: hashFiles('tsconfig.json') != ''
         run: npx tsc --noEmit
 
-      # ESLint (only if an ESLint config exists)
-      - name: Lint
-        if: |
+      # ESLint only if any eslint config exists
+      - if: |
           hashFiles('.eslintrc*') != '' ||
           hashFiles('**/.eslintrc*') != ''
         run: npx eslint . --max-warnings=0
 
-      # Non-interactive health check for Expo projects
-      - name: Expo doctor
-        run: npx expo doctor --fix --ci
+      # Non-interactive Expo health check
+      - run: npx expo doctor --fix --ci
